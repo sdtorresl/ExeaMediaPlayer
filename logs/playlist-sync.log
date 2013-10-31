@@ -1,0 +1,11 @@
+--2013-09-24 10:04:56--  http://lafayette.control.exeamedia.com/device/33/scheduled
+Resolving lafayette.control.exeamedia.com (lafayette.control.exeamedia.com)... 23.92.28.22
+Connecting to lafayette.control.exeamedia.com (lafayette.control.exeamedia.com)|23.92.28.22|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [application/json]
+Saving to: `/home/sdtorresl/exeamediaplayer/playlist/scheduled'
+
+     0K                                                        67.0K=0s
+
+2013-09-24 10:05:18 (67.0 KB/s) - `/home/sdtorresl/exeamediaplayer/playlist/scheduled' saved [2]
+

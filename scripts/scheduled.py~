@@ -1,0 +1,61 @@
+#!/usr/bin/python
+from time import gmtime, strftime, localtime, time
+from datetime import datetime
+import json
+import os.path #For check if a file exist
+from jsonrpclib.jsonrpc import TransportMixIn, XMLTransport
+from jsonrpclib import Server
+from unicodedata import numeric
+
+class Transport(TransportMixIn, XMLTransport):
+    """Replaces the json-rpc mixin so we can specify the http headers."""
+    def send_content(self, connection, request_body):
+        connection.putheader("Content-Type", "application/json")
+        connection.putheader("Content-Length", str(len(request_body)))
+        connection.endheaders()
+        if request_body:
+            connection.send(request_body)
+
+def checkFile(file):
+    if os.path.exists(file):
+        return True
+    else:
+        return False
+        
+def main():
+         
+    #Shedulled items
+    print 'checking'
+    if checkFile("/home/sdtorresl/exeamediaplayer/playlist/scheduled"):  
+	print 'checked'
+
+        try:
+            json_scheduled = open('/home/sdtorresl/exeamediaplayer/playlist/scheduled')
+            scheduled = json.load(json_scheduled)
+
+            ts = time() # Current timestamp
+            system_time = (int)(ts/100)
+
+            print "System date:"
+            print system_time
+
+            for (i, item) in scheduled.items():
+                item_ts = int(item['time'])
+                item_dt = datetime.fromtimestamp(int(item_ts))
+                item_time = (int)(item_ts/100)
+
+                print "Item time:"
+                print item_time
+
+                if(item_time == system_time):
+                    item_file = item['path']
+                    if checkFile("/home/sdtorresl/exeamediaplayer/media/share/" + item_file):
+                        print '/home/sdtorresl/exeamediaplayer/media/share/' + item_file
+                    else:
+                        print "File to play at " + item_dt.strftime('%D/%M %H:%m') + " doesn't exist"
+        except:
+            print "No JSON object could be decoded"
+
+
+if __name__ == '__main__':
+    main()

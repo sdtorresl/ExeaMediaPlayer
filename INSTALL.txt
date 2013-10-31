@@ -1,0 +1,25 @@
+INSTALLATION
+=================
+
+Execute the script to make the installation
+
+/bin/bash setup.sh
+
+Define the DNAME in scripts/syncfiles.sh maybe you need define also the RPATH
+
+Create the crontabs
+
+*/5 * * * *     /home/pi/exeamediaplayer/scripts/syncfiles.sh
+@reboot /home/pi/exeamediaplayer/scripts/genpplaylist.sh
+* * * * *     /usr/bin/python /home/pi/exeamediaplayer/scripts/player.py
+
+FInally, enable XBMC to start at boot in 
+
+/etc/default/xbmc
+
+con los siguientes valores
+
+ENABLED=1
+USER=pi
+
+
