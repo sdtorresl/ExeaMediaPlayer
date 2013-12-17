@@ -40,31 +40,31 @@ echo "Installing Git"
 sudo aptitude install git
 cd ~
 echo "Getting the files to the Exea Media Player from Github"
-git clone https://github.com/aldibier/exeamediaplayer.git
+git clone https://github.com/s/ExeaMediaPlayer.git
 
 echo "Installing XBMC"
 sudo apt-get install xbmc
 
 echo "Modifying XBMC"
-cp -rp ~/exeamediaplayer/xbmc/guisettings.xml ~/.xbmc/userdata/guisettings.xml
-sudo cp -rp ~/exeamediaplayer/xbmc/Startup.xml /usr/share/xbmc/addons/skin.confluence/720p/
-sudo cp -rp ~/exeamediaplayer/xbmc/DialogBusy.xml /usr/share/xbmc/addons/skin.confluence/720p/
+cp -rp ~/ExeaMediaPlayer/xbmc/guisettings.xml ~/.xbmc/userdata/guisettings.xml
+sudo cp -rp ~/ExeaMediaPlayer/xbmc/Startup.xml /usr/share/xbmc/addons/skin.confluence/720p/
+sudo cp -rp ~/ExeaMediaPlayer/xbmc/DialogBusy.xml /usr/share/xbmc/addons/skin.confluence/720p/
 
 echo "Installing LogmeIn Hamachi"
 sudo apt-get install --fix-missing lsb lsb-core
-sudo dpkg --force-architecture --force-depends -i ~/exeamediaplayer/binaries/logmein-hamachi_2.1.0.101-1_armel.deb
+sudo dpkg --force-architecture --force-depends -i ~/ExeaMediaPlayer/binaries/logmein-hamachi_2.1.0.101-1_armel.deb
 sudo hamachi login
 sudo hamachi attach soporte@exeamedia.com
 
 echo "Installing Fbi"
 sudo apt-get install fbi
-sudo ln -s ~/exeamediaplayer/pictures/splash.png /etc/splash.png
-sudo ln -s ~/exeamediaplayer/scripts/asplashscreen /etc/init.d/asplashscreen
+sudo ln -s ~/ExeaMediaPlayer/pictures/splash.png /etc/splash.png
+sudo ln -s ~/ExeaMediaPlayer/scripts/asplashscreen /etc/init.d/asplashscreen
 sudo chmod a+x /etc/init.d/asplashscreen
 sudo insserv /etc/init.d/asplashscreen
 
 echo "Installing jsonrpclib"
-$PYTHON ~/exeamediaplayer/scripts/ez_setup.py
+$PYTHON ~/ExeaMediaPlayer/scripts/ez_setup.py
 sudo easy_install jsonrpclib
 
 echo "Installing BTSync"
@@ -72,4 +72,4 @@ mkdir ~/.btsync && cd ~/.btsync
 wget http://btsync.s3-website-us-east-1.amazonaws.com/btsync_arm.tar.gz
 tar -xvf btsync_arm.tar.gz 
 chmod +x ./btsync
-./btsync
+#./btsync
