@@ -9,9 +9,9 @@ Define the DNAME in scripts/syncfiles.sh maybe you need define also the RPATH
 
 Create the crontabs
 
-*/5 * * * *     /home/pi/exeamediaplayer/scripts/syncfiles.sh
-@reboot /home/pi/exeamediaplayer/scripts/genpplaylist.sh
-* * * * *     /usr/bin/python /home/pi/exeamediaplayer/scripts/player.py
+*/5 * * * *     /home/pi/ExeaMediaPlayer/scripts/syncfiles.sh
+@reboot /home/pi/ExeaMediaPlayer/scripts/genpplaylist.sh
+* * * * *     /usr/bin/python /home/pi/ExeaMediaPlayer/scripts/player.py
 
 FInally, enable XBMC to start at boot in 
 
