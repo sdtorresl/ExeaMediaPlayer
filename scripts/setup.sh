@@ -40,7 +40,7 @@ echo "Installing Git"
 sudo aptitude install git
 cd ~
 echo "Getting the files to the Exea Media Player from Github"
-git clone https://github.com/s/ExeaMediaPlayer.git
+git clone https://github.com/sdtorresl/ExeaMediaPlayer.git
 
 echo "Installing XBMC"
 sudo apt-get install xbmc

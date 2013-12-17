@@ -460,7 +460,7 @@
         <width>720</width>
     </window>
     <skinsettings>
-        <setting type="bool" name="skin.confluence.Use_Startup_Playlist">true</setting>
+        <setting type="bool" name="skin.confluence.Use_Startup_Playlist">false</setting>
         <setting type="bool" name="skin.confluence.UseCustomBackground">false</setting>
         <setting type="bool" name="skin.confluence.HideBackGroundFanart">false</setting>
         <setting type="bool" name="skin.confluence.ShowBackgroundVideo">false</setting>
@@ -504,7 +504,7 @@
         <setting type="string" name="skin.confluence.HomeProgramButton3"></setting>
         <setting type="string" name="skin.confluence.HomeProgramButton4"></setting>
         <setting type="string" name="skin.confluence.HomeProgramButton5"></setting>
-        <setting type="string" name="skin.confluence.Startup_Playlist_Path">/home/pi/exeamediaplayer/playlist/global.m3u</setting>
+        <setting type="string" name="skin.confluence.Startup_Playlist_Path"></setting>
         <setting type="string" name="skin.confluence.LyricScript_Path"></setting>
         <setting type="string" name="skin.confluence.SubtitleScript_Path"></setting>
         <setting type="string" name="skin.confluence.HomeProgramButton6"></setting>
