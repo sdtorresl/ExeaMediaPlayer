@@ -49,6 +49,9 @@ echo "Modifying XBMC"
 cp -rp ~/ExeaMediaPlayer/xbmc/guisettings.xml ~/.xbmc/userdata/guisettings.xml
 sudo cp -rp ~/ExeaMediaPlayer/xbmc/Startup.xml /usr/share/xbmc/addons/skin.confluence/720p/
 sudo cp -rp ~/ExeaMediaPlayer/xbmc/DialogBusy.xml /usr/share/xbmc/addons/skin.confluence/720p/
+sudo cp -rp ~/ExeaMediaPlayer/xbmc/VideoFullScreen.xml /usr/share/xbmc/addons/skin.confluence/720p/
+sudo cp -rp ~/ExeaMediaPlayer/xbmc/advancedsettings.xml /usr/share/xbmc/system
+sudo cp -rp ~/ExeaMediaPlayer/xbmc/RssFeeds.xml ~/.xbmc/userdata
 
 echo "Installing LogmeIn Hamachi"
 sudo apt-get install --fix-missing lsb lsb-core

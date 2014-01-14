@@ -1,0 +1,27 @@
+<advancedsettings>
+  <video>
+    <defaultplayer>omxplayer</defaultplayer>
+    <defaultdvdplayer>omxplayer</defaultdvdplayer>
+  </video>
+  <audio>
+    <defaultplayer>omxplayer</defaultplayer>
+    <streamsilence>false</streamsilence>
+  </audio>
+
+	<gui>
+		<algorithmdirtyregions>3</algorithmdirtyregions>
+		<nofliptimeout>0</nofliptimeout>
+	</gui>
+
+	<splash>false</splash>
+
+	<bginfoloadermaxthreads>2</bginfoloadermaxthreads>
+
+	<lookandfeel>
+		<enablerssfeeds>true</enablerssfeeds>
+	</lookandfeel>
+
+	<cputempcommand>sed -e 's/\([0-9]*\)[0-9]\{3\}.*/\1 C/' /sys/class/thermal/thermal_zone0/temp</cputempcommand>
+	<gputempcommand>/opt/vc/bin/vcgencmd measure_temp | sed "s,temp=\([0-9]*\)\.[0-9]'C,\1 C,"</gputempcommand>
+
+</advancedsettings>

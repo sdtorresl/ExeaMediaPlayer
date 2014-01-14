@@ -28,8 +28,8 @@ def main():
     name_playlist = strftime("%H:00", localtime()) 
 
     #Add items to playlist
-    if checkFile('/home/pi/exeamediaplayer/playlist/sync'):
-        json_data = open('/home/pi/exeamediaplayer/playlist/sync')
+    if checkFile('/home/pi/ExeaMediaPlayer/playlist/sync'):
+        json_data = open('/home/pi/ExeaMediaPlayer/playlist/sync')
         try:
             data = json.load(json_data)
             # Current Playlist info
@@ -49,20 +49,20 @@ def main():
                     for(j, item) in current_playlist.items():
                         item_file = item['path']
                         print item_file
-                        if checkFile("/home/pi/exeamediaplayer/media/share/" + item_file):
-                            server.Playlist.Add(1, {'file': '/home/pi/exeamediaplayer/media/share/' + item_file})
+                        if checkFile("/home/pi/ExeaMediaPlayer/media/share/" + item_file):
+                            server.Playlist.Add(1, {'file': '/home/pi/ExeaMediaPlayer/media/share/' + item_file})
 
             info = server.Playlist.GetItems(1)
             print info
 
         except:
-            print "No JSON object could be decoded"
-	    os.system('killall xbmc.bin')
+			print "No JSON object could be decoded"
+			os.system('killall xbmc.bin')
            
     #Shedulled items
-    if checkFile("/home/pi/exeamediaplayer/playlist/sheduled"):  
+    if checkFile("/home/pi/ExeaMediaPlayer/playlist/sheduled"):  
         try:
-            json_sheduled = open('/home/pi/exeamediaplayer/playlist/sheduled')
+            json_sheduled = open('/home/pi/ExeaMediaPlayer/playlist/sheduled')
             sheduled = json.load(json_sheduled)
 
             ts = time() # Current timestamp
@@ -81,14 +81,14 @@ def main():
 
                 if(item_time == system_time):
                     item_file = item['path']
-                    if checkFile("/home/pi/exeamediaplayer/media/share/" + item_file):
+                    if checkFile("/home/pi/ExeaMediaPlayer/media/share/" + item_file):
                         server.Playlist.Clear(1)
-                        server.Playlist.Add(1, {'file': '/home/pi/exeamediaplayer/media/share/' + item_file})
+                        server.Playlist.Add(1, {'file': '/home/pi/ExeaMediaPlayer/media/share/' + item_file})
                     else:
                         print "File to play at " + item_dt.strftime('%D/%M %H:%m') + " doesn't exist"
         except:
-            print "No JSON object could be decoded"
-	    os.system('killall xbmc.bin')
+			print "No JSON object could be decoded"
+			os.system('killall xbmc.bin')
 
     #server.Playlist.Clear(1)
     #server.Player.Open({'playlistid': 1})

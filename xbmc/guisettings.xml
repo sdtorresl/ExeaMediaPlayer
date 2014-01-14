@@ -461,7 +461,7 @@
     </window>
     <skinsettings>
         <setting type="bool" name="skin.confluence.Use_Startup_Playlist">false</setting>
-        <setting type="bool" name="skin.confluence.UseCustomBackground">false</setting>
+        <setting type="bool" name="skin.confluence.UseCustomBackground">true</setting>
         <setting type="bool" name="skin.confluence.HideBackGroundFanart">false</setting>
         <setting type="bool" name="skin.confluence.ShowBackgroundVideo">false</setting>
         <setting type="bool" name="skin.confluence.ShowBackgroundVis">false</setting>
@@ -483,7 +483,7 @@
         <setting type="bool" name="skin.confluence.HideFilenameFlagging">false</setting>
         <setting type="bool" name="skin.confluence.ActivateTvTunes">false</setting>
         <setting type="bool" name="skin.confluence.HideVisualizationFanart">false</setting>
-        <setting type="string" name="skin.confluence.CustomBackgroundPath"></setting>
+        <setting type="string" name="skin.confluence.CustomBackgroundPath">/home/pi/ExeaMediaPlayer/pictures/lafayette.png</setting>
         <setting type="string" name="skin.confluence.HomeVideosButton1"></setting>
         <setting type="string" name="skin.confluence.HomeVideosButton2"></setting>
         <setting type="string" name="skin.confluence.HomeVideosButton3"></setting>

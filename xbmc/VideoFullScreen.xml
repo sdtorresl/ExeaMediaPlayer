@@ -1,0 +1,85 @@
+<window>
+ <defaultcontrol>-</defaultcontrol>
+	<controls>
+		<!-- Background image --> 
+		<control type="image" id="2">
+			<description>background image</description>
+			<posx>0</posx>
+			<posy>640</posy>
+			<width>1280</width>
+			<height>80</height>
+			<texture border="20">OverlayDialogBackground.png</texture>
+		</control>
+		<!-- Weather widget --> 
+		<control type="group" id="2">
+			<posx>1100</posx>
+			<posy>650</posy>
+			<visible>true</visible>
+			<include>Window_OpenClose_Animation</include>
+			<control type="image" id="2">
+				<description>Weather image</description>
+				<posx>0</posx>
+				<posy>0</posy>|
+				<width>60</width>
+				<height>60</height>
+				<aspectratio>keep</aspectratio>
+				<texture>$INFO[Weather.Conditions]</texture>
+			</control>
+			<control type="label" id="2">
+				<description>Temp label</description>
+				<posx>60</posx>
+				<posy>15</posy>
+				<width min="0" max="300">auto</width>
+				<height>30</height>
+				<align>left</align>
+				<aligny>center</aligny>
+				<font>Lafayette</font>
+				<textcolor>white</textcolor>
+				<shadowcolor>black</shadowcolor>
+				<label>[B]$INFO[Window(Weather).Property(Current.Temperature)][/B]</label>
+			</control>
+			<control type="label" id="2">
+				<description>Temp Units</description>
+				<posx>130</posx>
+				<posy>10</posy>
+				<width min="0" max="100">auto</width>
+				<height>22</height>
+				<font>font35</font>
+				<aligny>center</aligny>
+				<label>$INFO[System.TemperatureUnits]</label>
+				<textcolor>white</textcolor>
+				<shadowcolor>black</shadowcolor>
+				<visible>true</visible>
+			</control>
+		</control>
+		<!-- Clock --> 
+		<control type="label" id="2">
+			<description>Clock label</description>
+			<posx>25</posx>
+			<posy>650</posy>
+			<width>400</width>
+			<height>60</height>
+			<align>left</align>
+			<aligny>center</aligny>
+			<font>Lafayette</font>
+			<textcolor>white</textcolor>
+			<shadowcolor>black</shadowcolor>
+			<label>$INFO[System.Time]</label>
+			<visible>true</visible>
+		</control>
+		<!-- Rss feeds -->
+		<control type="rss" id="2">
+			<description>RSS feed</description>
+			<posx>250</posx>
+			<posy>660</posy>
+			<height>60</height>
+			<width>800</width>
+			<font>Lafayette2</font>
+			<urlset>1</urlset>
+			<textcolor>blue</textcolor>
+			<titlecolor>blue</titlecolor>
+			<headlinecolor>white</headlinecolor>
+			<visible>true</visible>
+		</control>
+	</controls>
+</window>
