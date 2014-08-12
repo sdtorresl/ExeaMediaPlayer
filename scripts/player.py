@@ -43,7 +43,7 @@ def main():
 
             if total <= 10:
                 server.Playlist.Clear(1)
-                print "Entro"
+
                 for (i, playlist) in data.items():
                     current_playlist = playlist[name_playlist]
                     for(j, item) in current_playlist.items():

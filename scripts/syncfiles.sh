@@ -36,8 +36,8 @@ else
 	cp ~/ExeaMediaPlayer/playlist/scheduled ~/ExeaMediaPlayer/playlist/scheduled_old
 fi
 
-#Check for Internet connection
-ping -c 4 www.google.com > /dev/null
+#Check for connection with exeamedia
+ping -c 4 www.exeamedia.com > /dev/null
 if [ "$?" -eq 0 ]; then
 	echo "Internet connection was verified successfully...";
 else
@@ -47,10 +47,10 @@ else
 fi
 
 #Get sync file
-$WGET -erobots=off -O ~/ExeaMediaPlayer/playlist/sync -o $LOGFILE http://lafayette.control.exeamedia.com/device/$DNAME/sync
+$WGET -erobots=off -O ~/ExeaMediaPlayer/playlist/sync -o $LOGFILE http://corral.exeamedia.com/device/$DNAME/sync
 
 #Get scheduled file
-$WGET -erobots=off -O ~/ExeaMediaPlayer/playlist/scheduled -o $LOGFILE http://lafayette.control.exeamedia.com/device/$DNAME/scheduled
+$WGET -erobots=off -O ~/ExeaMediaPlayer/playlist/scheduled -o $LOGFILE http://corral.exeamedia.com/device/$DNAME/scheduled
 
 #Verify that sync file is not empty
 if [ -s ~/ExeaMediaPlayer/playlist/sync ] ; then
