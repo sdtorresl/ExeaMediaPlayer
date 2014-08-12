@@ -29,7 +29,7 @@ function usage() {
 	echo -e "Usage: $0 [arguments]\n"
 
 	echo -e "-H, --home [HOME]\tSpecify the install directory"
-	echo -e "-f, --force\t\tForce logmeIn Hamachi installation"
+	echo -e "-F, --force\t\tForce full installation"
 	echo -e "-h, --help\t\tPrint this help\n"
 
 	echo "Examples:"
@@ -57,7 +57,7 @@ while [ "$1" != "" ]; do
 			shift
             HOME=$1
 			;;
-        -f | --force )
+        -F | --force )
 			FORCE=1
             ;;
         -h | --help )
@@ -71,40 +71,70 @@ while [ "$1" != "" ]; do
     shift
 done
 
-
 clear
 
 echo "The Exea Media Player is installing..."
 
 # Install the Repo for XBMC
-touch /etc/apt/sources.list.d/mene.list
-$SHELL -c "echo 'deb http://archive.mene.za.net/raspbian wheezy contrib' >> /etc/apt/sources.list.d/mene.list"
-apt-key adv --keyserver keyserver.ubuntu.com --recv-key 5243CDED
+if [[ ! -f /etc/apt/sources.list.d/mene.list ]]; then
+	touch /etc/apt/sources.list.d/mene.list
+	$SHELL -c "echo 'deb http://archive.mene.za.net/raspbian wheezy contrib' >> /etc/apt/sources.list.d/mene.list"
+	apt-key adv --keyserver keyserver.ubuntu.com --recv-key 5243CDED
+fi
 
-# Update the respository list
-apt-get -y update
+# Update the system
+if [[ $FORCE -eq 0 ]]; then
+	echo "Update the system? (Y/n)"
+	read updateSystem
+	if [[ $updateSystem -eq "Y" ]]; then
+		apt-get -y update
+	else
+		echo "System will be not updated"
+	fi
+else
+	apt-get -y update
+fi
 
-# install Git
+
+# Install Git and update previous installation if the user uant
 echo "Installing Git..."
 apt-get -y install git
 cd $HOME
-echo "Removing previous installation of ExeaMediaPlayer..."
-rm -rf $HOME/ExeaMediaPlayer
-echo "Getting the files to the Exea Media Player from Github..."
-git clone https://github.com/sdtorresl/ExeaMediaPlayer.git
+if [[ -d $HOME/ExeaMediaPlayer ]]; then
+	if [[ $FORCE -eq 0 ]]; then
+		echo "Update previous installation of ExeaMediaPlayer? (Y/n)"
+		read update
+	else
+		update="Y"
+	fi
+
+	if [[ "$update" == "Y" ]]; then
+		echo "Removing previous installation of ExeaMediaPlayer..."
+		rm -rf $HOME/ExeaMediaPlayer
+		echo "Getting the files to the Exea Media Player from Github..."
+		git clone https://github.com/sdtorresl/ExeaMediaPlayer.git
+	else
+		echo "Previous installation will be not removed"
+	fi
+else
+	git clone https://github.com/sdtorresl/ExeaMediaPlayer.git
+fi
 
 echo "Installing XBMC..."
 sudo apt-get install xbmc
 
 echo "Modifying XBMC..."
-cp -rp $HOME/ExeaMediaPlayer/xbmc/guisettings.xml $HOME/.xbmc/userdata/guisettings.xml
-cp -rp $HOME/ExeaMediaPlayer/xbmc/Startup.xml /usr/share/xbmc/addons/skin.confluence/720p/
-cp -rp $HOME/ExeaMediaPlayer/xbmc/DialogBusy.xml /usr/share/xbmc/addons/skin.confluence/720p/
-cp -rp $HOME/ExeaMediaPlayer/xbmc/VideoFullScreen.xml /usr/share/xbmc/addons/skin.confluence/720p/
-cp -rp $HOME/ExeaMediaPlayer/xbmc/advancedsettings.xml /usr/share/xbmc/system
-cp -rp $HOME/ExeaMediaPlayer/xbmc/RssFeeds.xml $HOME/.xbmc/userdata
-cp -rp $HOME/ExeaMediaPlayer/xbmc/xbmc /etd/default/xbmc
-cp -rp $HOME/ExeaMediaPlayer/xbmc/.bashrc $HOME/ExeaMediaPlayer/xbmc/.bashrc
+if [[ ! -d $HOME/.xbmc/userdata ]]; then
+	mkdir -p $HOME/.xbmc/userdata
+fi
+cp -rfp $HOME/ExeaMediaPlayer/xbmc/guisettings.xml $HOME/.xbmc/userdata/guisettings.xml
+cp -rfp $HOME/ExeaMediaPlayer/xbmc/Startup.xml /usr/share/xbmc/addons/skin.confluence/720p/
+cp -rfp $HOME/ExeaMediaPlayer/xbmc/DialogBusy.xml /usr/share/xbmc/addons/skin.confluence/720p/
+cp -rfp $HOME/ExeaMediaPlayer/xbmc/VideoFullScreen.xml /usr/share/xbmc/addons/skin.confluence/720p/
+cp -rfp $HOME/ExeaMediaPlayer/xbmc/advancedsettings.xml /usr/share/xbmc/system
+cp -rfp $HOME/ExeaMediaPlayer/xbmc/RssFeeds.xml $HOME/.xbmc/userdata
+cp -rfp $HOME/ExeaMediaPlayer/xbmc/xbmc /etc/default/xbmc
+cp -rfp $HOME/ExeaMediaPlayer/xbmc/.bashrc $HOME/.bashrc
 
 echo "Installing Fbi..."
 apt-get install fbi
@@ -126,7 +156,7 @@ chmod +x ./btsync
 ./btsync & >> /dev/null
 
 cd $HOME/ExeaMediaPlayer
-mkdir $HOME/ExeaMediaPlayer/media/share/
+mkdir -p $HOME/ExeaMediaPlayer/media/share/
 
 installLogmeIn="n"
 if [[ FORCE -eq 0 ]]; then
@@ -136,8 +166,7 @@ else
 	installLogmeIn="Y"
 fi
 
-if [[ installLogmeIn -eq "Y" ]]; then
-	#statements
+if [[ "$installLogmeIn" == "Y" ]]; then
 	apt-get install --fix-missing lsb lsb-core
 	dpkg --force-architecture --force-depends -i $HOME/ExeaMediaPlayer/binaries/logmein-hamachi_2.1.0.101-1_armel.deb
 	hamachi login
@@ -151,7 +180,12 @@ else
 	echo "LogmeIn Hamachi will be not installed"
 fi
 
+#Change file permissions
 chown -R pi:pi $HOME
+chown root /etc/default/xbmc
+
 cd $HOME
+
+echo "Installation of ExeaMediaPlayer was done succesfully!"
 
 exit 0
